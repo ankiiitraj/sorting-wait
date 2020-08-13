@@ -246,9 +246,27 @@ class Visualizer extends Component {
 
   render() {
     // console.log(this.state);
-    if (!this.state.start) {
-      return (
-        <>
+    // if (!this.state.start) {
+    return (
+      <>
+        <div style={{width: "100vw", backgroundColor: "black", boxShadow: "0 8px 6px -6px #3b3b3b", display: "flex", fiex: "row", justifyContent: "space-between"}}>
+          <div style={{padding: "10px", color: "#00cc01", fontSize: "x-large"}}>Sorting Wait!</div>
+          <div style={{padding: "10px"}}>
+            <button style={{marginRight: "10px", backgroundColor: "#00cc01", color: "#1b1b1b", borderRadius: "5px", cursor: "pointer", border: "none", padding: "5px"}} disabled={this.state.disabled} name="bubble" onClick={this.handleClick}>
+              {this.state.disabled ? "Disabled": "BubbleSort"}
+            </button>
+            <button style={{marginRight: "10px", backgroundColor: "#00cc01", color: "#1b1b1b", borderRadius: "5px", cursor: "pointer", border: "none", padding: "5px"}} disabled={this.state.disabled} name="merge" onClick={this.handleClick}>
+              {this.state.disabled ?"Disabled" : "MergeSort"}
+            </button>
+            <button style={{marginRight: "10px", backgroundColor: "#00cc01", color: "#1b1b1b", borderRadius: "5px", cursor: "pointer", border: "none", padding: "5px"}} disabled={this.state.disabled} name="quick" onClick={this.handleClick}>
+              {this.state.disabled ?"Disabled" : "QuickSort"}
+            </button>
+            <button style={{marginRight: "10px", backgroundColor: "#00ccFF", color: "#1b1b1b", borderRadius: "5px", cursor: "pointer", border: "none", padding: "5px"}} name="shuffle" onClick={this.handleClick}>
+              Reshuffle
+            </button>
+          </div>
+        </div>
+        {!this.state.start && 
           <div
             style={{
               display: "flex",
@@ -270,71 +288,39 @@ class Visualizer extends Component {
               );
             })}
           </div>
-          <button disabled={this.state.disabled} name="bubble" onClick={this.handleClick}>
-            Start_bubble
-          </button>
-          <br/>
-          <button disabled={this.state.disabled} name="merge" onClick={this.handleClick}>
-            Start_merge
-          </button>
-          <br/>
-          <button disabled={this.state.disabled} name="quick" onClick={this.handleClick}>
-            Start_quick
-          </button>
-          <br/>
-          <button name="shuffle" onClick={this.handleClick}>
-            Shuffle
-          </button>
-        </>
-      );
-    }
-    return (
-      <>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-          }}
-        >
-          {this.state.arr.map((elem, key) => {
-            return (
-              <div
-                key={key}
-                style={{
-                  height: `${elem}px`,
-                  width: `${this.state.width}px`,
-                  backgroundColor:
-                    this.state.idxes[key] === 1
-                      ? "#00cc01"
-                      : this.state.cur === key
-                      ? "yellow"
-                      : this.state.next === key
-                      ? "red"
-                      : key > this.state.upto
-                      ? "#00cc01"
-                      : "purple",
-                  margin: "1px",
-                }}
-              ></div>
-            );
-          })}
-        </div>
-        <button disabled={this.state.disabled} name="bubble" onClick={this.handleClick}>
-          Start_bubble
-        </button>
-        <br/>
-        <button disabled={this.state.disabled} name="merge" onClick={this.handleClick}>
-          Start_merge
-        </button>
-        <br/>
-        <button disabled={this.state.disabled} name="quick" onClick={this.handleClick}>
-          Start_quick
-        </button>
-        <br/>
-        <button name="shuffle" onClick={this.handleClick}>
-          Shuffle
-        </button>
+        }
+        {this.state.start &&
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            {this.state.arr.map((elem, key) => {
+              return (
+                <div
+                  key={key}
+                  style={{
+                    height: `${elem}px`,
+                    width: `${this.state.width}px`,
+                    backgroundColor:
+                      this.state.idxes[key] === 1
+                        ? "#00cc01"
+                        : this.state.cur === key
+                        ? "yellow"
+                        : this.state.next === key
+                        ? "red"
+                        : key > this.state.upto
+                        ? "#00cc01"
+                        : "purple",
+                    margin: "1px",
+                  }}
+                ></div>
+              );
+            })}
+          </div>
+        }
       </>
     );
   }
