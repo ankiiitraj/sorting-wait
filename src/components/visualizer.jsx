@@ -225,9 +225,12 @@ class Visualizer extends Component {
     let i = 0;
     let animate = setInterval(() => {
       let temp = JSON.parse(animations[i]);
+      if(!temp.hasOwnProperty("idxes")){
+        temp.idxes = this.state.idxes;
+      }
       this.setState({
         arr: temp.arr,
-        idxes: temp.idxes|this.state.idxes,
+        idxes: temp.idxes,
         cur: temp.cur,
         next: temp.next,
         upto: temp.upto,
@@ -260,7 +263,7 @@ class Visualizer extends Component {
                   style={{
                     height: `${elem}px`,
                     width: `${this.state.width}px`,
-                    backgroundColor: "black",
+                    backgroundColor: "purple",
                     margin: "1px",
                   }}
                 ></div>
@@ -303,14 +306,14 @@ class Visualizer extends Component {
                   width: `${this.state.width}px`,
                   backgroundColor:
                     this.state.idxes[key] === 1
-                      ? "purple"
+                      ? "#00cc01"
                       : this.state.cur === key
                       ? "yellow"
                       : this.state.next === key
                       ? "red"
                       : key > this.state.upto
-                      ? "purple"
-                      : "black",
+                      ? "#00cc01"
+                      : "purple",
                   margin: "1px",
                 }}
               ></div>
