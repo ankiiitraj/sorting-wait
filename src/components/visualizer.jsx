@@ -12,8 +12,8 @@ class Visualizer extends Component {
       cur: -1,
       next: -1,
       upto: -1,
-      size: -1,
-      width: 5,
+      size: 100,
+      width: 3,
     };
     this.handleClick = this.handleClick.bind(this);
     this.animate = this.animate.bind(this);
@@ -24,6 +24,7 @@ class Visualizer extends Component {
     this.quickSortUtil = this.quickSortUtil.bind(this);
     this.pratitioning = this.pratitioning.bind(this);
     this.shuffle = this.shuffle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -46,15 +47,22 @@ class Visualizer extends Component {
     
   }
 
+  handleChange(e){
+    e.preventDefault();
+    let size = e.target.value;
+    this.setState({size: size}, () => {
+      this.shuffle();
+    });
+  }
+
   shuffle(){
-    let size = 100,
+    let size = this.state.size,
       tempArr = [], tempIdxes = [];
     for (let i = 0; i < size; ++i){
       tempArr.push((Math.floor(Math.random() * 10000) % 500) + 5);
       tempIdxes.push(0);
     }
-    this.setState({ idxes: tempIdxes, arr: tempArr, upto: size, size: size });
-    console.log(this.state.arr);
+    this.setState({ idxes: tempIdxes, arr: tempArr, upto: size, disabled: false });
     return;
   }
 
@@ -241,7 +249,7 @@ class Visualizer extends Component {
         this.setState({ upto: -1, cur: -1, next: -1 });
         clearInterval(animate);
       }
-    }, 1);
+    }, 0.1);
   }
 
   render() {
@@ -251,6 +259,7 @@ class Visualizer extends Component {
       <>
         <div style={{width: "100vw", backgroundColor: "black", boxShadow: "0 8px 6px -6px #3b3b3b", display: "flex", fiex: "row", justifyContent: "space-between"}}>
           <div style={{padding: "10px", color: "#00cc01", fontSize: "x-large"}}>Sorting Wait!</div>
+          <input disabled={this.state.disabled} type="range" min="50" max="250" value={this.state.size} onChange={this.handleChange}></input>
           <div style={{padding: "10px"}}>
             <button style={{marginRight: "10px", backgroundColor: "#00cc01", color: "#1b1b1b", borderRadius: "5px", cursor: "pointer", border: "none", padding: "5px"}} disabled={this.state.disabled} name="bubble" onClick={this.handleClick}>
               {this.state.disabled ? "Disabled": "BubbleSort"}
