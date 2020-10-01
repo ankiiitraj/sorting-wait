@@ -34,13 +34,13 @@ class Visualizer extends Component {
   handleClick(e) {
     this.setState({ disabled: true });
 
-    if(e.target.name == "bubble"){
+    if(e.target.name === "bubble"){
       this.bubbleSort();
-    }else if(e.target.name == "merge"){
+    }else if(e.target.name === "merge"){
       this.mergeSort();
-    }else if(e.target.name == "quick"){
+    }else if(e.target.name === "quick"){
       this.quickSort();
-    }else if(e.target.name == "shuffle"){
+    }else if(e.target.name === "shuffle"){
       this.shuffle();
       this.setState({ disabled: false });
     }
@@ -129,7 +129,7 @@ class Visualizer extends Component {
   }
 
   mergeSortUtil(arr, l, r, animations, newState) {
-    if (l == r) {
+    if (l === r) {
       return;
     }
     // console.log(newState);
@@ -245,7 +245,7 @@ class Visualizer extends Component {
         size: temp.size,
       });
       ++i;
-      if (i == animations.length) {
+      if (i === animations.length) {
         this.setState({ upto: -1, cur: -1, next: -1 });
         clearInterval(animate);
       }
